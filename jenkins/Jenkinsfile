@@ -55,9 +55,9 @@ pipeline {
                 }
             }
         }
-        stage('Deployment') {
+        stage('Deliver') {
             steps {
-                sh 'nohup ./mvnw spring-boot:run -Dserver.port=8001 &'
+                sh './jenkins/scripts/deliver.sh'
             }
         }
     }
