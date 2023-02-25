@@ -55,10 +55,9 @@ pipeline {
                 }
             }
         }
-        stage('Deliver') {
+        stage('Deploy') {
             steps {
-                sh "sudo chmod +x './jenkins/scripts/deliver.sh'"
-                sh './jenkins/scripts/deliver.sh'
+                sh 'nohup mvn spring-boot:run -Dserver.port=8001 &'
             }
         }
     }
