@@ -35,6 +35,11 @@
 // using tools
 pipeline {
   agent any
+  environment {
+    registry = "randyaji/spring-maven-app"
+    registryCredential = 'randyaji'
+    dockerImage = ''
+    }
   tools {
     maven 'maven-3.9.0'
     jdk 'java17'
@@ -53,6 +58,22 @@ pipeline {
                     }
                 }
             }
+        }
+    stage('Building our image') {
+    steps{
+    script {
+    dockerImage = docker.build registry + ":$BUILD_NUMBER"
+    }
+    }
+    }
+stage('Deploy our image') {
+steps{
+script {
+docker.withRegistry( '', registryCredential ) {
+dockerImage.push()
+            }
+            }
+       }
         }
     }
 }
