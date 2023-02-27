@@ -45,11 +45,14 @@ pipeline {
         sh 'mvn clean package'
       }
     }
-    stage('Docker Build') {
-            agent any
-        steps {
-            sh 'docker build -t randyaji/spring-maven-app:latest .'
+    stage('docker build') {
+            steps {
+                dir('Dockerfile'){
+                    script{
+                        dockerImage = docker.build("imageName")
+                    }
+                }
+            }
         }
-    }
     }
 }
