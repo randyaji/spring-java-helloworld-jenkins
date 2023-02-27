@@ -50,15 +50,6 @@ pipeline {
         sh 'mvn clean package'
       }
     }
-    stage('docker build') {
-            steps {
-                dir('Dockerfile'){
-                    script{
-                        dockerImage = docker.build("imageName")
-                    }
-                }
-            }
-        }
     stage('Building our image') {
     steps{
     script {
