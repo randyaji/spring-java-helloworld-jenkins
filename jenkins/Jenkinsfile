@@ -37,7 +37,7 @@ pipeline {
   agent any
   environment {
     registry = "randyaji/spring-maven-app"
-    registryCredential = 'randyaji'
+    registryCredential = 'dockerhub_randy'
     dockerImage = ''
     }
   tools {
