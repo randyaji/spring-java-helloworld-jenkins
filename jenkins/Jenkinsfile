@@ -67,5 +67,13 @@ pipeline {
             }
        }
         }
+        stage('Deploy to Minikube') {
+            steps {
+                script {
+                    docker.withRegistry('', registryCredential) {
+                        dockerImage.push()
+                        sh "kubectl apply -f deploy.yaml"
+                    }
+                }                                
     }
 }
